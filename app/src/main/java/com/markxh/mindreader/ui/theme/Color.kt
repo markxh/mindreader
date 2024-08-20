@@ -1,4 +1,4 @@
-package com.example.mindreader.ui.theme
+package com.markxh.mindreader.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

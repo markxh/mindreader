@@ -1,6 +1,5 @@
-package com.example.mindreader.ui.theme
+package com.markxh.mindreader.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

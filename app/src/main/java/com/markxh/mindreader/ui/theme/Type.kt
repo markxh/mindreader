@@ -1,4 +1,4 @@
-package com.example.mindreader.ui.theme
+package com.markxh.mindreader.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package com.example.mindreader
+package com.markxh.mindreader
 
 import org.junit.Test
 

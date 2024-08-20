@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mindreader"
+    namespace = "com.markxh.mindreader"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.mindreader"
+        applicationId = "com.markxh.mindreader"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -59,6 +58,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Firebase and Crashlytics
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+
+    // App Startup
+    implementation(libs.androidx.startup.runtime)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
