@@ -2,15 +2,19 @@ package com.markxh.mindreader.ui.guesstile.presentation.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -21,34 +25,56 @@ import androidx.compose.ui.unit.dp
 import kotlin.random.Random
 
 @Composable
-fun GuessTIleScreen() {
-    var selectedTile by remember { mutableIntStateOf(-1) }
-    val correctTile = remember { Random.nextInt(9) }
+fun GuessTileScreen() {
+    var selectedTile by remember { mutableStateOf(-1) }
+    var correctTile by remember { mutableStateOf(Random.nextInt(9)) }
 
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+    Column(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        contentPadding = PaddingValues(16.dp)
+        verticalArrangement = Arrangement.Center
     ) {
-        itemsIndexed((0 until 9).chunked(3)) { rowIndex, rowItems ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                rowItems.forEach { index ->
-                    val color = when {
-                        selectedTile == -1 -> Color.Gray
-                        index == correctTile -> Color.Green
-                        else -> Color.Red
-                    }
+        // Grid of tiles
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(16.dp)
+        ) {
+            itemsIndexed((0 until 9).chunked(3)) { rowIndex, rowItems ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    rowItems.forEach { index ->
+                        val color = when {
+                            selectedTile == -1 -> Color.Gray
+                            index == correctTile -> Color.Green
+                            else -> Color.Red
+                        }
 
-                    Surface(
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clickable {
-                                selectedTile = index
-                            },
-                        color = color
-                    ) {}
+                        Surface(
+                            modifier = Modifier
+                                .size(100.dp)
+                                .clickable {
+                                    selectedTile = index
+                                },
+                            color = color
+                        ) {}
+                    }
                 }
             }
+        }
+
+        // Reset Button
+        Button(
+            onClick = {
+                selectedTile = -1
+                correctTile = Random.nextInt(9)
+            },
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            androidx.compose.material3.Text(text = "Reset")
         }
     }
 }
@@ -56,5 +82,5 @@ fun GuessTIleScreen() {
 @Preview
 @Composable
 fun PreviewGuessTileScreen() {
-    GuessTIleScreen()
+    GuessTileScreen()
 }
